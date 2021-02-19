@@ -325,35 +325,35 @@ var _api = __w_pdfjs_require__(202);
 
 var _util = __w_pdfjs_require__(5);
 
-var _annotation_layer = __w_pdfjs_require__(217);
+var _annotation_layer = __w_pdfjs_require__(216);
 
 var _api_compatibility = __w_pdfjs_require__(206);
 
-var _worker_options = __w_pdfjs_require__(210);
+var _worker_options = __w_pdfjs_require__(209);
 
-var _text_layer = __w_pdfjs_require__(218);
+var _text_layer = __w_pdfjs_require__(217);
 
-var _svg = __w_pdfjs_require__(219);
+var _svg = __w_pdfjs_require__(218);
 
-var pdfjsVersion = '2.7.3';
-var pdfjsBuild = 'ee8bcd664';
+var pdfjsVersion = '2.6.347';
+var pdfjsBuild = '3be9c65f';
 {
   var _require = __w_pdfjs_require__(7),
       isNodeJS = _require.isNodeJS;
 
   if (isNodeJS) {
-    var PDFNodeStream = __w_pdfjs_require__(220).PDFNodeStream;
+    var PDFNodeStream = __w_pdfjs_require__(219).PDFNodeStream;
 
     (0, _api.setPDFNetworkStreamFactory)(function (params) {
       return new PDFNodeStream(params);
     });
   } else {
-    var PDFNetworkStream = __w_pdfjs_require__(223).PDFNetworkStream;
+    var PDFNetworkStream = __w_pdfjs_require__(222).PDFNetworkStream;
 
     var PDFFetchStream;
 
     if ((0, _display_utils.isFetchSupported)()) {
-      PDFFetchStream = __w_pdfjs_require__(224).PDFFetchStream;
+      PDFFetchStream = __w_pdfjs_require__(223).PDFFetchStream;
     }
 
     (0, _api.setPDFNetworkStreamFactory)(function (params) {
@@ -1861,8 +1861,7 @@ exports.TextRenderingMode = TextRenderingMode;
 var ImageKind = {
   GRAYSCALE_1BPP: 1,
   RGB_24BPP: 2,
-  RGBA_32BPP: 3,
-  GRAYSCALE_8BPP: 4
+  RGBA_32BPP: 3
 };
 exports.ImageKind = ImageKind;
 var AnnotationType = {
@@ -12232,19 +12231,19 @@ var _api_compatibility = __w_pdfjs_require__(206);
 
 var _canvas = __w_pdfjs_require__(207);
 
-var _worker_options = __w_pdfjs_require__(210);
+var _worker_options = __w_pdfjs_require__(209);
 
 var _is_node = __w_pdfjs_require__(7);
 
-var _message_handler = __w_pdfjs_require__(211);
+var _message_handler = __w_pdfjs_require__(210);
 
-var _metadata = __w_pdfjs_require__(212);
+var _metadata = __w_pdfjs_require__(211);
 
-var _optional_content_config = __w_pdfjs_require__(214);
+var _optional_content_config = __w_pdfjs_require__(213);
 
-var _transport_stream = __w_pdfjs_require__(215);
+var _transport_stream = __w_pdfjs_require__(214);
 
-var _webgl = __w_pdfjs_require__(216);
+var _webgl = __w_pdfjs_require__(215);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -12463,7 +12462,7 @@ function _fetchDocument(worker, source, pdfDataRangeTransport, docId) {
 
   return worker.messageHandler.sendWithPromise("GetDocRequest", {
     docId: docId,
-    apiVersion: '2.7.3',
+    apiVersion: '2.6.347',
     source: {
       data: source.data,
       url: source.url,
@@ -14793,9 +14792,9 @@ var InternalRenderTask = function InternalRenderTaskClosure() {
   return InternalRenderTask;
 }();
 
-var version = '2.7.3';
+var version = '2.6.347';
 exports.version = version;
-var build = 'ee8bcd664';
+var build = '3be9c65f';
 exports.build = build;
 
 /***/ }),
@@ -15579,8 +15578,6 @@ var _util = __w_pdfjs_require__(5);
 
 var _pattern_helper = __w_pdfjs_require__(208);
 
-var _scale = __w_pdfjs_require__(209);
-
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -16166,28 +16163,6 @@ var CanvasGraphics = function CanvasGraphicsClosure() {
 
         ctx.putImageData(chunkImgData, 0, i * FULL_CHUNK_HEIGHT);
       }
-    } else if (imgData.kind === _util.ImageKind.GRAYSCALE_8BPP) {
-      thisChunkHeight = FULL_CHUNK_HEIGHT;
-      elemsInThisChunk = width * thisChunkHeight;
-
-      for (i = 0; i < totalChunks; i++) {
-        if (i >= fullChunks) {
-          thisChunkHeight = partialChunkHeight;
-          elemsInThisChunk = width * thisChunkHeight;
-        }
-
-        destPos = 0;
-
-        for (j = elemsInThisChunk; j--;) {
-          dest[destPos++] = src[srcPos];
-          dest[destPos++] = src[srcPos];
-          dest[destPos++] = src[srcPos];
-          dest[destPos++] = 255;
-          srcPos++;
-        }
-
-        ctx.putImageData(chunkImgData, 0, i * FULL_CHUNK_HEIGHT);
-      }
     } else {
       throw new Error("bad image kind: ".concat(imgData.kind));
     }
@@ -16203,50 +16178,27 @@ var CanvasGraphics = function CanvasGraphicsClosure() {
     var srcPos = 0;
     var src = imgData.data;
     var dest = chunkImgData.data;
-    var thisChunkHeight, i, destPos;
 
-    if (imgData.isMaskScaled) {
-      thisChunkHeight = FULL_CHUNK_HEIGHT;
-      var elemsInThisChunk = width * thisChunkHeight;
+    for (var i = 0; i < totalChunks; i++) {
+      var thisChunkHeight = i < fullChunks ? FULL_CHUNK_HEIGHT : partialChunkHeight;
+      var destPos = 3;
 
-      for (i = 0; i < totalChunks; i++) {
-        if (i >= fullChunks) {
-          thisChunkHeight = partialChunkHeight;
-          elemsInThisChunk = width * thisChunkHeight;
-        }
+      for (var j = 0; j < thisChunkHeight; j++) {
+        var mask = 0;
 
-        destPos = 3;
-
-        for (j = elemsInThisChunk; j--;) {
-          dest[destPos] = 255 - src[srcPos];
-          destPos += 4;
-          srcPos++;
-        }
-
-        ctx.putImageData(chunkImgData, 0, i * FULL_CHUNK_HEIGHT);
-      }
-    } else {
-      for (i = 0; i < totalChunks; i++) {
-        thisChunkHeight = i < fullChunks ? FULL_CHUNK_HEIGHT : partialChunkHeight;
-        destPos = 3;
-
-        for (var j = 0; j < thisChunkHeight; j++) {
-          var mask = 0;
-
-          for (var k = 0; k < width; k++) {
-            if (!mask) {
-              var elem = src[srcPos++];
-              mask = 128;
-            }
-
-            dest[destPos] = elem & mask ? 0 : 255;
-            destPos += 4;
-            mask >>= 1;
+        for (var k = 0; k < width; k++) {
+          if (!mask) {
+            var elem = src[srcPos++];
+            mask = 128;
           }
-        }
 
-        ctx.putImageData(chunkImgData, 0, i * FULL_CHUNK_HEIGHT);
+          dest[destPos] = elem & mask ? 0 : 255;
+          destPos += 4;
+          mask >>= 1;
+        }
       }
+
+      ctx.putImageData(chunkImgData, 0, i * FULL_CHUNK_HEIGHT);
     }
   }
 
@@ -17523,10 +17475,6 @@ var CanvasGraphics = function CanvasGraphicsClosure() {
         return;
       }
 
-      if (!img.scaleProcessed) {
-        img = new _scale.ScaleJS().scaleMask(img);
-      }
-
       var ctx = this.ctx;
       var width = img.width,
           height = img.height;
@@ -17571,10 +17519,6 @@ var CanvasGraphics = function CanvasGraphicsClosure() {
         return;
       }
 
-      if (!imgData.scaleProcessed) {
-        imgData = new _scale.ScaleJS().scaleMask(imgData);
-      }
-
       var width = imgData.width;
       var height = imgData.height;
       var fillColor = this.current.fillColor;
@@ -17608,11 +17552,6 @@ var CanvasGraphics = function CanvasGraphicsClosure() {
 
       for (var i = 0, ii = images.length; i < ii; i++) {
         var image = images[i];
-
-        if (!image.scaleProcessed) {
-          image = new _scale.ScaleJS().scaleMask(image);
-        }
-
         var width = image.width,
             height = image.height;
         var maskCanvas = this.cachedCanvases.getCanvas("maskCanvas", width, height);
@@ -17675,10 +17614,6 @@ var CanvasGraphics = function CanvasGraphicsClosure() {
     paintInlineImageXObject: function CanvasGraphics_paintInlineImageXObject(imgData) {
       if (!this.contentVisible) {
         return;
-      }
-
-      if (!imgData.scaleProcessed) {
-        imgData = new _scale.ScaleJS().scaleImg(imgData);
       }
 
       var width = imgData.width;
@@ -17750,10 +17685,6 @@ var CanvasGraphics = function CanvasGraphicsClosure() {
     paintInlineImageXObjectGroup: function CanvasGraphics_paintInlineImageXObjectGroup(imgData, map) {
       if (!this.contentVisible) {
         return;
-      }
-
-      if (!imgData.scaleProcessed) {
-        imgData = new _scale.ScaleJS().scaleImg(imgData);
       }
 
       var ctx = this.ctx;
@@ -18355,381 +18286,6 @@ exports.TilingPattern = TilingPattern;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ScaleJS = void 0;
-
-var _util = __w_pdfjs_require__(5);
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-var ScaleJS = /*#__PURE__*/function () {
-  function ScaleJS() {
-    _classCallCheck(this, ScaleJS);
-  }
-
-  _createClass(ScaleJS, [{
-    key: "isMobile",
-    value: function isMobile() {
-      if (typeof navigator !== "undefined") {
-        return /iPad|iPhone|iPod/.test(navigator.userAgent) && window && !window.MSStream;
-      }
-
-      return false;
-    }
-  }, {
-    key: "determineScale",
-    value: function determineScale(width, height) {
-      var testColor = "#ffffff";
-      var colorData = new Uint8ClampedArray(4);
-      var scale = 0;
-
-      if (typeof window !== "undefined" && this.isMobile()) {
-        var canvas = document.createElement("canvas");
-        var context = canvas.getContext("2d");
-
-        while (colorData[0] !== 255) {
-          scale += 1;
-          canvas.width = width / scale;
-          canvas.height = height / scale;
-          context.fillStyle = testColor;
-          context.fillRect(0, 0, 1, 1);
-          colorData = context.getImageData(0, 0, 1, 1).data;
-        }
-      }
-
-      return scale;
-    }
-  }, {
-    key: "needsScale",
-    value: function needsScale(width, height, colorSpace, bpc) {
-      var scaleObj = {
-        width: width,
-        height: height,
-        scale: 1,
-        transformImage: false
-      };
-      var scale = this.determineScale(width, height);
-
-      if (scale > 1) {
-        scaleObj.transformImage = true;
-        scaleObj.scale = scale;
-
-        if (colorSpace === "DeviceGray" && bpc === 1 && scaleObj.scale > 2) {
-          scaleObj.scale = 4;
-        }
-
-        scaleObj.width = Math.ceil(width / scaleObj.scale);
-        scaleObj.height = Math.ceil(height / scaleObj.scale);
-      }
-
-      return scaleObj;
-    }
-  }, {
-    key: "scaleImg",
-    value: function scaleImg(imgData) {
-      if (!imgData.scaleProcessed) {
-        var imgScaleObj;
-
-        if (imgData.kind === _util.ImageKind.GRAYSCALE_1BPP) {
-          imgScaleObj = this.needsScale(imgData.width, imgData.height, "DeviceGray", 1);
-
-          if (imgScaleObj.transformImage) {
-            imgData.kind = _util.ImageKind.GRAYSCALE_8BPP;
-            imgData.data = this.scaleBWImage(imgData.data, imgData.width, imgData.height, imgData.width + 7 >> 3, imgScaleObj.scale);
-            imgData.width = imgScaleObj.width;
-            imgData.height = imgScaleObj.height;
-          }
-        } else if (imgData.kind === _util.ImageKind.RGB_24BPP) {
-          imgScaleObj = this.needsScale(imgData.width, imgData.height, "RGB", 1);
-
-          if (imgScaleObj.transformImage) {
-            imgData.data = this.scaleRGBImage(imgData.data, imgData.width, imgData.height, imgScaleObj.scale);
-            imgData.width = imgScaleObj.width;
-            imgData.height = imgScaleObj.height;
-          }
-        }
-
-        imgData.scaleProcessed = true;
-      }
-
-      return imgData;
-    }
-  }, {
-    key: "scaleMask",
-    value: function scaleMask(imgData) {
-      if (!imgData.scaleProcessed) {
-        imgData.isMaskScaled = false;
-        var imgScaleObj = this.needsScale(imgData.width, imgData.height, "DeviceGray", 1);
-
-        if (imgScaleObj.transformImage) {
-          imgData.data = this.scaleBWImage(imgData.data, imgData.width, imgData.height, imgData.width + 7 >> 3, imgScaleObj.scale);
-          imgData.width = imgScaleObj.width;
-          imgData.height = imgScaleObj.height;
-          imgData.isMaskScaled = true;
-        }
-
-        imgData.scaleProcessed = true;
-      }
-
-      return imgData;
-    }
-  }, {
-    key: "bitCount",
-    value: function bitCount(n) {
-      var count = 0;
-
-      while (n) {
-        count += n & 1;
-        n >>= 1;
-      }
-
-      return count;
-    }
-  }, {
-    key: "resizeOriginalImage",
-    value: function resizeOriginalImage(originalImage, originalHeight, rowBytes) {
-      var drawImage = new Uint8ClampedArray(originalHeight * rowBytes);
-      drawImage.set(originalImage);
-      drawImage.fill(255, originalImage.length, originalHeight * rowBytes);
-      return drawImage;
-    }
-  }, {
-    key: "scaleMainArea",
-    value: function scaleMainArea(newImage, img, rowBytes, newRowBytes, stopRow, stopCol, scale) {
-      var m;
-      var idx;
-      var row, col;
-
-      if (scale === 2) {
-        m = [0, 64, 64, 128];
-
-        for (row = 0; row < stopRow; row += scale) {
-          for (col = 0; col < stopCol; col++) {
-            idx = row * newRowBytes / 2 + col * 4;
-            newImage[idx++] = m[img[row * rowBytes + col] >> 6 & 0x03] + m[img[(row + 1) * rowBytes + col] >> 6 & 0x03];
-            newImage[idx++] = m[img[row * rowBytes + col] >> 4 & 0x03] + m[img[(row + 1) * rowBytes + col] >> 4 & 0x03];
-            newImage[idx++] = m[img[row * rowBytes + col] >> 2 & 0x03] + m[img[(row + 1) * rowBytes + col] >> 2 & 0x03];
-            newImage[idx++] = m[img[row * rowBytes + col] >> 0 & 0x03] + m[img[(row + 1) * rowBytes + col] >> 0 & 0x03];
-          }
-        }
-      } else if (scale === 4) {
-        m = [0, 16, 16, 32, 16, 32, 32, 48, 16, 32, 32, 48, 32, 48, 48, 64];
-
-        for (row = 0; row < stopRow; row += scale) {
-          for (col = 0; col < stopCol; col++) {
-            idx = row * newRowBytes / 4 + col * 2;
-            newImage[idx++] = m[img[row * rowBytes + col] >> 4 & 0x0f] + m[img[(row + 1) * rowBytes + col] >> 4 & 0x0f] + m[img[(row + 2) * rowBytes + col] >> 4 & 0x0f] + m[img[(row + 3) * rowBytes + col] >> 4 & 0x0f];
-            newImage[idx++] = m[img[row * rowBytes + col] >> 0 & 0x0f] + m[img[(row + 1) * rowBytes + col] >> 0 & 0x0f] + m[img[(row + 2) * rowBytes + col] >> 0 & 0x0f] + m[img[(row + 3) * rowBytes + col] >> 0 & 0x0f];
-          }
-        }
-      }
-    }
-  }, {
-    key: "scaleOtherAreas",
-    value: function scaleOtherAreas(newImage, img, rowBytes, newRowBytes, startRow, stopRow, startCol, stopCol, offsetX, offsetY, scale) {
-      var mask = 0x03;
-
-      if (scale === 4) {
-        mask = 0x0f;
-      }
-
-      var multFactor = 256 / (scale * offsetY);
-      var lastColPixelGroups = Math.ceil(offsetX / scale);
-      var offsetXMod = offsetX % scale;
-      var offsetXDiv = Math.floor(offsetX / scale);
-      var shiftValue, pixValue;
-
-      for (var row = startRow; row < stopRow; row += scale) {
-        for (var col = startCol; col < stopCol; col++) {
-          var idx = row * newRowBytes / scale + col * (8 / scale);
-
-          for (var colGroup = 0; colGroup < lastColPixelGroups; colGroup++) {
-            shiftValue = 8 - scale - scale * colGroup;
-
-            if (offsetXMod !== 0 && offsetXDiv === colGroup) {
-              if (scale === 2) {
-                mask = 0x02;
-              } else {
-                switch (offsetXMod) {
-                  case 3:
-                    mask = 0x0e;
-                    break;
-
-                  case 2:
-                    mask = 0x0c;
-                    break;
-
-                  case 1:
-                    mask = 0x08;
-                    break;
-                }
-              }
-
-              multFactor = 256 / (offsetXMod * offsetY);
-            }
-
-            pixValue = 0;
-
-            for (var j = 0; j < offsetY; j++) {
-              pixValue += this.bitCount(img[(row + j) * rowBytes + col] >> shiftValue & mask) * multFactor;
-            }
-
-            newImage[idx++] = pixValue;
-          }
-        }
-      }
-    }
-  }, {
-    key: "scaleBWImage",
-    value: function scaleBWImage(img, originalWidth, originalHeight, rowBytes, scale) {
-      var image = img;
-
-      if (img.length < originalHeight * rowBytes) {
-        image = this.resizeOriginalImage(img, originalHeight, rowBytes);
-      }
-
-      if (scale !== 2 && scale !== 4) {
-        scale = scale > 2 ? 4 : 2;
-      }
-
-      var newRowBytes = Math.ceil(originalWidth / scale);
-      var newHeight = Math.ceil(originalHeight / scale);
-      var newImage = new Uint8ClampedArray(newHeight * newRowBytes);
-      var offsetX = originalWidth % 8;
-      var offsetY = originalHeight % scale;
-      var stopRow = originalHeight - offsetY;
-      var stopCol = rowBytes - (offsetX === 0 ? 0 : 1);
-      this.scaleMainArea(newImage, image, rowBytes, newRowBytes, stopRow, stopCol, scale);
-
-      if (offsetX !== 0) {
-        this.scaleOtherAreas(newImage, image, rowBytes, newRowBytes, 0, stopRow, rowBytes - 1, rowBytes, offsetX, scale, scale);
-      }
-
-      if (offsetY !== 0) {
-        this.scaleOtherAreas(newImage, image, rowBytes, newRowBytes, originalHeight - offsetY, originalHeight, 0, stopCol, 8, offsetY, scale);
-      }
-
-      if (offsetX !== 0 && offsetY !== 0) {
-        this.scaleOtherAreas(newImage, image, rowBytes, newRowBytes, originalHeight - offsetY, originalHeight, rowBytes - 1, rowBytes, offsetX, offsetY, scale);
-      }
-
-      return newImage;
-    }
-  }, {
-    key: "filterArea",
-    value: function filterArea(origImg, filteredImg, scale, rowBytes, newRowBytes, numComps, filterData) {
-      var sumR, sumG, sumB;
-      var boxRow, boxCol;
-      var destIdx = 0,
-          srcCol,
-          srcRowIdx,
-          srcPixelIdx;
-      var scaleByScale = filterData.rowWindow * filterData.colWindow;
-
-      for (var row = filterData.startRow; row < filterData.endRow; row++) {
-        var srcRow = row * scale;
-
-        for (var col = filterData.startCol; col < filterData.endCol; col += numComps) {
-          destIdx = row * newRowBytes + col;
-          srcCol = col * scale;
-          sumR = 0;
-          sumG = 0;
-          sumB = 0;
-
-          for (boxRow = 0; boxRow < filterData.rowWindow; boxRow++) {
-            srcRowIdx = srcCol + rowBytes * (srcRow + boxRow);
-
-            for (boxCol = 0; boxCol < filterData.colWindow; boxCol++) {
-              srcPixelIdx = srcRowIdx + numComps * boxCol;
-              sumR += origImg[srcPixelIdx];
-              sumG += origImg[srcPixelIdx + 1];
-              sumB += origImg[srcPixelIdx + 2];
-            }
-          }
-
-          filteredImg[destIdx++] = sumR / scaleByScale;
-          filteredImg[destIdx++] = sumG / scaleByScale;
-          filteredImg[destIdx++] = sumB / scaleByScale;
-        }
-      }
-    }
-  }, {
-    key: "scaleRGBImage",
-    value: function scaleRGBImage(img, originalWidth, originalHeight, scale) {
-      var drawWidth = Math.ceil(originalWidth / scale);
-      var drawHeight = Math.ceil(originalHeight / scale);
-      var numComps = 3;
-      var rowBytes = originalWidth * numComps;
-      var newRowBytes = drawWidth * numComps;
-      var newImage = new Uint8ClampedArray(drawHeight * newRowBytes);
-      var overflowRowCnt = originalHeight % scale;
-      var overflowDestRow = overflowRowCnt > 0 ? drawHeight - 1 : originalHeight;
-      var overflowColCnt = originalWidth % scale;
-      var overflowDestCol = overflowColCnt > 0 ? newRowBytes - numComps : newRowBytes;
-      this.filterArea(img, newImage, scale, rowBytes, newRowBytes, numComps, {
-        startRow: 0,
-        endRow: overflowDestRow,
-        startCol: 0,
-        endCol: overflowDestCol,
-        rowWindow: scale,
-        colWindow: scale
-      });
-
-      if (overflowRowCnt !== 0) {
-        this.filterArea(img, newImage, scale, rowBytes, newRowBytes, numComps, {
-          startRow: overflowDestRow,
-          endRow: drawHeight,
-          startCol: 0,
-          endCol: overflowDestCol,
-          rowWindow: overflowRowCnt,
-          colWindow: scale
-        });
-      }
-
-      if (overflowColCnt !== 0) {
-        this.filterArea(img, newImage, scale, rowBytes, newRowBytes, numComps, {
-          startRow: 0,
-          endRow: overflowDestRow,
-          startCol: overflowDestCol,
-          endCol: newRowBytes,
-          rowWindow: scale,
-          colWindow: overflowColCnt
-        });
-      }
-
-      if (overflowRowCnt !== 0 && overflowColCnt !== 0) {
-        this.filterArea(img, newImage, scale, rowBytes, newRowBytes, numComps, {
-          startRow: overflowDestRow,
-          endRow: drawHeight,
-          startCol: overflowDestCol,
-          endCol: newRowBytes,
-          rowWindow: overflowRowCnt,
-          colWindow: overflowColCnt
-        });
-      }
-
-      return newImage;
-    }
-  }]);
-
-  return ScaleJS;
-}();
-
-exports.ScaleJS = ScaleJS;
-
-/***/ }),
-/* 210 */
-/***/ (function(module, exports, __w_pdfjs_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
 exports.GlobalWorkerOptions = void 0;
 var GlobalWorkerOptions = Object.create(null);
 exports.GlobalWorkerOptions = GlobalWorkerOptions;
@@ -18737,7 +18293,7 @@ GlobalWorkerOptions.workerPort = GlobalWorkerOptions.workerPort === undefined ? 
 GlobalWorkerOptions.workerSrc = GlobalWorkerOptions.workerSrc === undefined ? "" : GlobalWorkerOptions.workerSrc;
 
 /***/ }),
-/* 211 */
+/* 210 */
 /***/ (function(module, exports, __w_pdfjs_require__) {
 
 "use strict";
@@ -19290,7 +18846,7 @@ var MessageHandler = /*#__PURE__*/function () {
 exports.MessageHandler = MessageHandler;
 
 /***/ }),
-/* 212 */
+/* 211 */
 /***/ (function(module, exports, __w_pdfjs_require__) {
 
 "use strict";
@@ -19303,7 +18859,7 @@ exports.Metadata = void 0;
 
 var _util = __w_pdfjs_require__(5);
 
-var _xml_parser = __w_pdfjs_require__(213);
+var _xml_parser = __w_pdfjs_require__(212);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -19428,7 +18984,7 @@ var Metadata = /*#__PURE__*/function () {
 exports.Metadata = Metadata;
 
 /***/ }),
-/* 213 */
+/* 212 */
 /***/ (function(module, exports, __w_pdfjs_require__) {
 
 "use strict";
@@ -19961,7 +19517,7 @@ var SimpleXMLParser = /*#__PURE__*/function (_XMLParserBase) {
 exports.SimpleXMLParser = SimpleXMLParser;
 
 /***/ }),
-/* 214 */
+/* 213 */
 /***/ (function(module, exports, __w_pdfjs_require__) {
 
 "use strict";
@@ -20238,7 +19794,7 @@ var OptionalContentConfig = /*#__PURE__*/function () {
 exports.OptionalContentConfig = OptionalContentConfig;
 
 /***/ }),
-/* 215 */
+/* 214 */
 /***/ (function(module, exports, __w_pdfjs_require__) {
 
 "use strict";
@@ -20718,7 +20274,7 @@ var PDFDataTransportStreamRangeReader = /*#__PURE__*/function () {
 }();
 
 /***/ }),
-/* 216 */
+/* 215 */
 /***/ (function(module, exports, __w_pdfjs_require__) {
 
 "use strict";
@@ -21176,7 +20732,7 @@ var WebGLUtils = function WebGLUtilsClosure() {
 }();
 
 /***/ }),
-/* 217 */
+/* 216 */
 /***/ (function(module, exports, __w_pdfjs_require__) {
 
 "use strict";
@@ -22656,7 +22212,7 @@ var AnnotationLayer = /*#__PURE__*/function () {
 exports.AnnotationLayer = AnnotationLayer;
 
 /***/ }),
-/* 218 */
+/* 217 */
 /***/ (function(module, exports, __w_pdfjs_require__) {
 
 "use strict";
@@ -23352,7 +22908,7 @@ var renderTextLayer = function renderTextLayerClosure() {
 exports.renderTextLayer = renderTextLayer;
 
 /***/ }),
-/* 219 */
+/* 218 */
 /***/ (function(module, exports, __w_pdfjs_require__) {
 
 "use strict";
@@ -25088,7 +24644,7 @@ exports.SVGGraphics = SVGGraphics;
 }
 
 /***/ }),
-/* 220 */
+/* 219 */
 /***/ (function(module, exports, __w_pdfjs_require__) {
 
 "use strict";
@@ -25103,7 +24659,7 @@ var _regenerator = _interopRequireDefault(__w_pdfjs_require__(2));
 
 var _util = __w_pdfjs_require__(5);
 
-var _network_utils = __w_pdfjs_require__(221);
+var _network_utils = __w_pdfjs_require__(220);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -25735,7 +25291,7 @@ var PDFNodeStreamFsRangeReader = /*#__PURE__*/function (_BaseRangeReader2) {
 }(BaseRangeReader);
 
 /***/ }),
-/* 221 */
+/* 220 */
 /***/ (function(module, exports, __w_pdfjs_require__) {
 
 "use strict";
@@ -25751,7 +25307,7 @@ exports.validateResponseStatus = validateResponseStatus;
 
 var _util = __w_pdfjs_require__(5);
 
-var _content_disposition = __w_pdfjs_require__(222);
+var _content_disposition = __w_pdfjs_require__(221);
 
 function validateRangeRequestCapabilities(_ref) {
   var getResponseHeader = _ref.getResponseHeader,
@@ -25826,7 +25382,7 @@ function validateResponseStatus(status) {
 }
 
 /***/ }),
-/* 222 */
+/* 221 */
 /***/ (function(module, exports, __w_pdfjs_require__) {
 
 "use strict";
@@ -26037,7 +25593,7 @@ function getFilenameFromContentDispositionHeader(contentDisposition) {
 }
 
 /***/ }),
-/* 223 */
+/* 222 */
 /***/ (function(module, exports, __w_pdfjs_require__) {
 
 "use strict";
@@ -26052,7 +25608,7 @@ var _regenerator = _interopRequireDefault(__w_pdfjs_require__(2));
 
 var _util = __w_pdfjs_require__(5);
 
-var _network_utils = __w_pdfjs_require__(221);
+var _network_utils = __w_pdfjs_require__(220);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -26701,7 +26257,7 @@ var PDFNetworkStreamRangeRequestReader = /*#__PURE__*/function () {
 }();
 
 /***/ }),
-/* 224 */
+/* 223 */
 /***/ (function(module, exports, __w_pdfjs_require__) {
 
 "use strict";
@@ -26716,7 +26272,7 @@ var _regenerator = _interopRequireDefault(__w_pdfjs_require__(2));
 
 var _util = __w_pdfjs_require__(5);
 
-var _network_utils = __w_pdfjs_require__(221);
+var _network_utils = __w_pdfjs_require__(220);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
